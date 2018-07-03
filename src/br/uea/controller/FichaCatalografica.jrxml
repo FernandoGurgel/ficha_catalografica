@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichaCatalografica" language="groovy" pageWidth="555" pageHeight="802" whenNoDataType="NoDataSection" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="425"/>
+	<parameter name="sobrenome" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nome" class="java.lang.String">
+		<defaultValueExpression><![CDATA[","+$P{nome}]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tituloTrabalho" class="java.lang.String"/>
+	<parameter name="subtitulo" class="java.lang.String"/>
+	<parameter name="ano" class="java.lang.String"/>
+	<parameter name="nomeOrientador" class="java.lang.String"/>
+	<parameter name="numeroArabico" class="java.lang.String"/>
+	<parameter name="ilustrada" class="java.lang.String"/>
+	<parameter name="alturaFolha" class="java.lang.String"/>
+	<parameter name="coorientador" class="java.lang.String"/>
+	<parameter name="tipoTrabalho" class="java.lang.String"/>
+	<parameter name="nomeUnidade" class="java.lang.String"/>
+	<parameter name="bibliografia" class="java.lang.String"/>
+	<parameter name="palavraChave1" class="java.lang.String"/>
+	<parameter name="palavraChave2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="palavraChave3" class="java.lang.String"/>
+	<parameter name="palavraChave4" class="java.lang.String"/>
+	<parameter name="codCutter" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="palavraChave5" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="checkOrientadora" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="checkCoOrientadora" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="cursoPrograma" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="checkOrientadora2" class="java.lang.Boolean"/>
+	<parameter name="nomeOrientador2" class="java.lang.String"/>
+	<parameter name="coorientador2" class="java.lang.String"/>
+	<parameter name="checkCoOrientadora2" class="java.lang.Boolean">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="preNome" class="java.lang.String"/>
+	<parameter name="ultimoNome" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select nome_curso_diploma from cursos
+where id_curso = $P{cursoPrograma}]]>
+	</queryString>
+	<field name="NOME_CURSO_DIPLOMA" class="java.lang.String"/>
+	<variable name="codCuter" class="java.lang.String"/>
+	<detail>
+		<band height="802">
+			<rectangle>
+				<reportElement stretchType="RelativeToBandHeight" x="92" y="460" width="369" height="248" isRemoveLineWhenBlank="true"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="414" width="525" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="12"/>
+				</textElement>
+				<text><![CDATA[Ficha Catalográfica]]></text>
+			</staticText>
+			<textField pattern="">
+				<reportElement stretchType="RelativeToBandHeight" x="92" y="484" width="39" height="15"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{codCutter}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="144" y="484" width="302" height="214"/>
+				<textElement verticalAlignment="Top" markup="html">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["&nbsp;&nbsp;&nbsp;"+$P{tituloTrabalho}+ ($P{subtitulo}.equals("")? $P{subtitulo} : " : "+$P{subtitulo}) +" /  "+$P{nome}+"  "+$P{sobrenome} +". "+$P{ano}
++ "<br>"+"&nbsp;&nbsp;&nbsp;"+    $P{numeroArabico}+"  f.: "
++ ($P{ilustrada}.equals("Colorido") ? "il. color; " : "")
++ ($P{ilustrada}.equals("Preto e Branco") ? "il.; " : "")
++ "31 cm."
++ "<br>"+ ($P{checkOrientadora}==true ? "<br>&nbsp;&nbsp;&nbsp;Orientadora: "+$P{nomeOrientador}:"<br>&nbsp;&nbsp;&nbsp;Orientador: "+$P{nomeOrientador})
++($P{nomeOrientador2}.equals("")? " " :
+ ($P{checkOrientadora2}.equals("true") ? "<br>&nbsp;&nbsp;&nbsp;Orientadora: "+$P{nomeOrientador2}:"<br>&nbsp;&nbsp;&nbsp;Orientador: " +$P{nomeOrientador2}))
++($P{coorientador}.equals("")? " " :
+ ($P{checkCoOrientadora}==true ? "<br>&nbsp;&nbsp;&nbsp;Coorientadora: "+$P{coorientador}:"<br>&nbsp;&nbsp;&nbsp;Coorientador: "+$P{coorientador}))
++ ($P{coorientador2}.equals("")? " " :
+ ($P{checkCoOrientadora2}.equals("true") ? "<br>&nbsp;&nbsp;&nbsp;Coorientadora: "+$P{coorientador2}:"<br>&nbsp;&nbsp;&nbsp;Coorientador: "+$P{coorientador2}))
++ "<br>"
++ ($P{tipoTrabalho}.equals("1") ? "&nbsp;&nbsp;&nbsp;Tese " : "")
++ ($P{tipoTrabalho}.equals("2") ? "&nbsp;&nbsp;&nbsp;Dissertação ": "")
++ ($P{tipoTrabalho}.equals("3") ? "&nbsp;&nbsp;&nbsp;TCC de Especialização ": "")
++ ($P{tipoTrabalho}.equals("4") ? "&nbsp;&nbsp;&nbsp;TCC de Graduação ": "")
++ "("+$F{NOME_CURSO_DIPLOMA}+") - Universidade Estadual do Amazonas."
++ "<br><br>"
++($P{palavraChave1}.equals("") ? "" : "&nbsp;&nbsp;&nbsp;1. "+$P{palavraChave1}+". ")
++($P{palavraChave2}.equals("") ? "" : "2. "+$P{palavraChave2}+". ")
++($P{palavraChave3}.equals("") ? "" : "3. "+$P{palavraChave3}+". ")
++($P{palavraChave4}.equals("") ? "" : "4. "+$P{palavraChave4}+". ")
++($P{palavraChave5}.equals("") ? "" : "5. "+$P{palavraChave5}+". ")
++ "I. " +  $P{ultimoNome} + ", " + $P{preNome} + " II. Universidade Estadual do Amazonas  III. Título"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="432" width="525" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Ficha catalográfica elaborada automaticamente de acordo com os dados fornecidos pelo(a) autor(a).  ]]></text>
+			</staticText>
+			<textField>
+				<reportElement stretchType="RelativeToBandHeight" x="144" y="472" width="302" height="12"/>
+				<textElement>
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{sobrenome} + ", "+$P{nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
+
